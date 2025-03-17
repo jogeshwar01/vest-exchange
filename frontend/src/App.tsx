@@ -1,7 +1,21 @@
+import "./App.css";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Trade } from "./pages/Trade";
+import { Toaster } from "sonner";
+import { TradesProvider } from "./state/TradesProvider";
+
 function App() {
   return (
     <>
-      <div className="text-white">Vest Exchange</div>
+      <TradesProvider>
+        <Toaster closeButton className="pointer-events-auto" />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/trade/:market" element={<Trade />} />
+            <Route path="*" element={<Navigate to="/trade/ETH-PERP" />} />
+          </Routes>
+        </BrowserRouter>
+      </TradesProvider>
     </>
   );
 }
